@@ -1,2 +1,2 @@
 # eis2020tmc3
- hello this is fhz reader txt
+ hello this is fhz
