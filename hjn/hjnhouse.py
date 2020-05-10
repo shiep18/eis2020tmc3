@@ -1,64 +1,1 @@
-import mcpi.minecraft as minecraft
-import mcpi.block as block
-import csv
-mc = minecraft.Minecraft.create("47.100.46.95",4783)
-entityId= mc.getPlayerEntityId("HJN")
-pos=mc.entity.getPos(entityId)
-import os
-import time
-import threading
-from dynamic import *
-
-#print("player pos is",pos)     #player pos is Vec3(108,2,-88)
-class House:
-    def __init__(self,x,y,z,l,w,h,num):
-        self.x=x
-        self.y=y
-        self.z=z
-        self.l=l
-        self.w=w
-        self.h=h
-        self.num=num
-        
-    def house(self):
-        mc.setBlocks(self.x,self.y-1,self.z,self.x+self.l,self.y+self.h-1,self.z+self.w,5,35,2)
-        mc.setBlocks(self.x+1,self.y,self.z+1,self.x+self.l-1,self.y+self.h-2,self.z+self.w-1,0)   #建一个火柴盒
-    	mc.setBlocks(self.x+1,self.y-1,self.z+1,self.x+self.l-1,self.y-1,self.z+self.w-1,block.WOOL.id,0)#铺地毯
-        mc.setBlocks(self.x+2,self.y+1,self.z,self.x+4,self.y+3,self.z,block.GLASS.id)#窗
-        mc.setBlocks(self.x,self.y+1,self.z+2,self.x,self.y+3,self.z+4,block.GLASS.id)#窗
-        mc.setBlocks(self.x+6,self.y,self.z,self.x+6,self.y+1,self.z,64)              #门w
-        reader = csv.reader(open(str(self.num)+'.csv'))                                      #屋顶
-        data=[]
-        for r in reader:
-            data.append(r)
-        for i in range(10):
-            for j in range(10):
-                if (data[j][i]=='1'):
-                    mc.setBlock(self.x+i,self.y+5,self.z+j,79)
-
-    def isInHouse(self,x0,y0,z0):
-        if self.x<=x0<=self.x+self.l and self.y<=y0<=self.y+self.h and self.z<=z0<=self.z+self.w:
-            return True
-        else:
-            return False
-
-def whileinhouse():
-    reader = csv.reader(open('house.csv'))
-    data=[]
-    name=[]
-    for r in reader:
-        data.append(r)
-    for i in range(27):
-        name.append(data[i][0])
-        for j in range(7):
-            data[i][j+1]=int(data[i][j+1])
-        data[i][0]=House(data[i][1],data[i][2],data[i][3],data[i][4],data[i][5],data[i][6],data[i][7])
-        data[i][0].house()
-    while True:
-        pos = mc.player.getTilePos()            #重新获取坐标位置
-        for i in range(27):
-            if data[i][0].isInHouse(pos.x,pos.y,pos.z):#判断在家就播放音频
-                print("欢迎来到"+name[i]+"的家")
-                os.system("欢迎回家.wav")          
-                time.sleep(6)
-
+import mcpi.minecraft as minecraftimport mcpi.block as blockimport csvmc = minecraft.Minecraft.create("47.100.46.95",4783)entityId= mc.getPlayerEntityId("HJN")pos=mc.entity.getPos(entityId)def house(x,y,z):    mc.setBlocks(x,y,z,x+9,y+4,z+9,5,2)    mc.setBlocks(x+1,y,z+1,x+8,y+4,z+8,0)   #建一个火柴盒    mc.setBlocks(x,y+1,z+5,x,y+2,z+4,0)     #门    mc.setBlocks(x+1,y,z+1,x+8,y,z+8,169)   #地板    mc.setBlocks(x,y+5,z,x+9,y+5,z+9,17)    #顶    mc.setBlocks(x-1,y,z+10,x+10,y,z+10,190)    mc.setBlocks(x-1,y,z-1,x+10,y,z-1,190)    mc.setBlocks(x+10,y,z-1,x+10,y,z+10,190)    mc.setBlocks(x-1,y,z-1,x-1,y,z+10,190)  #栅栏    mc.setBlocks(x-1,y,z+5,x-1,y,z+4,126,2)    mc.setBlocks(x,y+3,z+5,x,y+3,z+4,126,2) #台阶    mc.setBlocks(x,y,z,x,y+4,z,17)    mc.setBlocks(x+9,y,z,x+9,y+4,z,17)    mc.setBlocks(x,y,z+9,x,y+4,z+9,17)    mc.setBlocks(x+9,y,z+9,x+9,y+4,z+9,17)  #柱子    for i in range(6):        mc.setBlocks(x-1,y+5+i,z-1+i,x+10,y+5+i,z-1+i,80)        mc.setBlocks(x-1,y+10-i,z+5+i,x+10,y+10-i,z+5+i,80)    for i in range(4):        mc.setBlocks(x,y+6+i,z+1+i,x,y+6+i,z+8-i,5,2)        mc.setBlocks(x+9,y+6+i,z+1+i,x+9,y+6+i,z+8-i,5,2)#阁楼    mc.setBlocks(x,y+2,z+2,x,y+3,z+2,20)    mc.setBlocks(x,y+2,z+7,x,y+3,z+7,20)    mc.setBlocks(x+3,y+2,z,x+6,y+3,z,20)    mc.setBlocks(x+3,y+2,z+9,x+6,y+3,z+9,20)    mc.setBlocks(x+9,y+2,z+3,x+9,y+3,z+6,20)    mc.setBlocks(x,y+7,z+4,x,y+7,z+5,20)    mc.setBlocks(x+9,y+7,z+4,x+9,y+7,z+5,20)#窗    reader = csv.reader(open('house.csv'))data=[]for r in reader:    data.append(r)for name in data:    if name[0] == 'clancenter':        cx=int(name[1])        cy=int(name[2])        cz=int(name[3])    elif name[0] == 'hjn':        sx=int(name[1])        sy=int(name[2])        sz=int(name[3])house(cx+sx,cy+sy,cz+sz)
