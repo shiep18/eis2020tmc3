@@ -49,7 +49,7 @@ mc. setBlocks (pos.x+3, pos.y+5,pos.z+3,pos.x+5, pos.y+5,pos.z+5,169)
 #mc. setBlocks (pos.x+3, pos.y-1,pos.z+3,pos.x+5, pos.y-1,pos.z+5,169)
 mc. setBlock(pos.x-15, pos.y, pos.z+3, 355)
     
-reader = csv.reader(open('1.csv'))
+reader = csv.reader(open('house.csv'))
 data=[]
 for r in reader:
     data.append(r)
