@@ -51,3 +51,5 @@ for name in data:
         sz=int(name[3])
 
 house(cx+sx,cy+sy,cz+sz)
+
+#hjn2020.5.11
