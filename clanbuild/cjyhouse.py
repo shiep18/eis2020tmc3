@@ -33,7 +33,6 @@ mc. setBlock(pos.x, pos.y+1, pos.z+4, 194, 4)
 mc. setBlock(pos.x, pos.y+2, pos.z+4, 194, 8)
 mc. setBlock(pos.x, pos.y+19, pos.z+6, 26)
 #mc. setBlock(pos.x, pos.y+19, pos.z+7, 26,4)
-#台阶
 
 mc. setBlock(pos.x-1, pos.y, pos.z+3, 53, 2)
 mc. setBlock(pos.x-1, pos.y, pos.z+4, 53, 0)
