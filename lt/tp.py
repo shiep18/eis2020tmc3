@@ -6,5 +6,6 @@ entityId= mc.getPlayerEntityId("LT")
 pos=mc.entity.getTilePos(entityId)
 print("player pos is",pos)
 
+
 def tp(x,y,z):                       
     mc.entity.setTilePos(entityId,x,y,z)
