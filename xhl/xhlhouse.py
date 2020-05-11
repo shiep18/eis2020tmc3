@@ -1,3 +1,6 @@
+#house
+
+
 from mcpi.minecraft import Minecraft
 import time
 
@@ -6,7 +9,7 @@ entityId = mc.getPlayerEntityId("xhl")
 pos=mc.entity.getPos(entityId)
 
 pos=mc.player.getTilePos()
-print("player pos is",pos)
+#print("player pos is",pos)
 
 
 mc.setBlocks(pos.x,pos.y,pos.z,pos.x+10,pos.y+20,pos.z+30,3)
