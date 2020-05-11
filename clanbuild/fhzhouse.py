@@ -17,13 +17,22 @@ mc=Minecraft.create("47.100.46.95",4783)
 # A constant, that sets the size of your house
 SIZE = 20
 
-# Get the players position
-pos = mc.player.getTilePos()
-
-# Decide where to start building the house, slightly away from player
-x = pos.x + 2
-y = pos.y
-z = pos.z
+reader = csv.reader(open('house.csv'))
+data=[]
+for r in reader:
+    data.append(r)
+for name in data:
+    if name[0] == 'clancenter':
+        cx=int(name[1])
+        cy=int(name[2])
+        cz=int(name[3])
+    elif name[0] == 'fhz':
+        sx=int(name[1])
+        sy=int(name[2])
+        sz=int(name[3])
+x=cx+sx
+y=cy+sy
+z=cz+sz
 
 # Calculate the midpoints of the front face of the house
 midx = x+SIZE/2

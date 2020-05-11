@@ -7,10 +7,22 @@ from mcpi.minecraft import Minecraft
 
 mc=Minecraft.create('47.100.46.95',4783)
 SIZE=10
-pos = mc.player.getTilePos()
-x = pos.x
-y = pos.y
-z = pos.z
+reader = csv.reader(open('house.csv'))
+data=[]
+for r in reader:
+    data.append(r)
+for name in data:
+    if name[0] == 'clancenter':
+        cx=int(name[1])
+        cy=int(name[2])
+        cz=int(name[3])
+    elif name[0] == 'cjy':
+        sx=int(name[1])
+        sy=int(name[2])
+        sz=int(name[3])
+x=cx+sx
+y=cy+sy
+z=cz+sz
 midx = x+SIZE/2
 midy = y+SIZE/2
 mc.setBlocks(x,y,z,x+SIZE,y+SIZE,z+SIZE,block.COBBLESTONE.id)
